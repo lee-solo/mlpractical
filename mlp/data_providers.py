@@ -234,7 +234,7 @@ class EMNISTDataProvider(DataProvider):
         # separator for the current platform / OS is used
         # MLP_DATA_DIR environment variable should point to the data directory
         data_path = os.path.join(
-            os.environ['MLP_DATA_DIR'], 'emnist-{0}.npz'.format(which_set))
+            "..\\data", 'emnist-{0}.npz'.format(which_set))
         assert os.path.isfile(data_path), (
             'Data file does not exist at expected path: ' + data_path
         )
@@ -295,8 +295,12 @@ class EMNISTDataProvider(DataProvider):
         (num_data, num_classes)
 
         """
+        onehot = np.eye(self.num_classes)[int_targets]
+        epsilon=1e-8
+        smoothed = np.where(onehot<epsilon, alpha/(self.num_classes-1), 1-alpha)
+        return smoothed
         
-        raise NotImplementedError
+        #raise NotImplementedError
   
     
 
