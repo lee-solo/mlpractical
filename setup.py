@@ -10,4 +10,3 @@ setup(
     url = "https://github.com/VICO-UoE/mlpractical",
     packages=['mlp']
 )
-
